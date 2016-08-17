@@ -1,0 +1,29 @@
+<%= form_for(@announcement) do |f| %>
+  <% if @announcement.errors.any? %>
+      <div id="error_explanation">
+      <h2><%= pluralize(@announcement.errors.count, "error") %> prohibited this announcement from being saved:</h2>
+
+      <ul>
+      <% @announcement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+
+<div class="form-group">
+  <label>Title</label><br/>
+    <%= f.text_field :title %><br>
+</div>
+
+    <%= f.text_field :body %>
+    <%= f.text_field :user_id %>
+
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

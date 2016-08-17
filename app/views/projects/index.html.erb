@@ -1,0 +1,95 @@
+
+<div class="row">
+	<div class="col-md-7">
+			<div class="page header" >
+			<h3> Listing Projects </h3>
+			</div>
+<b> Fileter by:
+<%= link_to "New", projects_path(status: "New") %> |
+<%= link_to "On-Going", projects_path(status: "On-Going") %> |
+<%= link_to "Completed", projects_path(status: "Completed") %> |
+<%= link_to "All", projects_path %>
+</b>
+<br/>
+
+<b> Filter by:
+<% current_user.clients.each do |client| %>
+<%= link_to client.name, projects_path(client_id: client.id) %> |
+<% end %>
+
+
+<% if @projects.empty? %>
+	<p>No Projects Found </p>
+	<% else %>
+	<table border="table table-stiped">
+	<thead>
+	<tr>
+	<th>Name</th>
+	<th>Client</th>
+	<th>Start Date</th>
+	<th>Description</th>
+	<th>End Date</th>
+	<th>Budget</th>
+	<th>Actions</th>
+	<th>Status</th>
+	</tr>
+	</thead>
+	<% @projects.each do |project| %>
+		<tr>
+		<td><%= project.name %></td>
+		<td><%= project.client.nil? ? "N/A" :project.client.name %></td>  
+		<td><%= project.start_date.strftime("%A, %d %B %Y") %></td>
+		<td><%= project.description %></td>
+		<td><%= project.end_date.strftime("%A, %d %B %Y") %></td>
+		<td><%= project.budget %></td>
+		<td><%= link_to "Show", project_path(project.id) %>
+		<td><%= project.status %></td>
+		</tr>
+		<% end %>
+		<tbody>
+		</tbody>
+		<% end %>
+		</table>
+
+		<%= link_to "Add Project", new_project_path %>
+</div>
+
+
+
+
+<div class="col-md-5">
+		<div class="page-header">
+		<h3> Status </h3>
+		</div>
+
+		<%# data = { }
+		data["new"] = @projects.where('status = ?', "New" ).size
+		data["on-going"] = @projects.where('status = ?', "On-Going" ).size
+		data["completed"] = @projects.where('status = ?', "Completed" ).size
+		%>
+		<%=
+		data = {}
+		statuses = @projects.pluck(:status).uniq
+		statuses.each do |status|
+		data[status] = @projects.where('status = ?', status).size
+		end
+		%> 
+		<%= pie_chart(data) %>
+		<%= column_chart(data) %>
+
+		
+
+		<h3> Tasks assigned to the project </h3>
+		<%
+		data = { }
+		
+		@projects.each do |project|
+			data[project.name] =project.tasks.size
+		end
+		%>
+		<%= column_chart(data) %>
+		<%= pie_chart(data) %>
+
+</div>
+
+</div>

@@ -1,0 +1,35 @@
+<table border="1">
+	<thead>
+	<tr>
+	<th>Name</th>
+	<th>Client</th>
+	<th>Start Date</th>
+	<th>Description</th>
+	<th>End Date</th>
+	<th>Budget</th>
+	<th>Actions</th>
+	</tr>
+	</thead>
+	
+		
+		<td><%= @project.name %></td>
+		<td><%= @project.client.nil? ? "N/A" :@project.client.name %></td>  
+		<td><%= @project.start_date.strftime("%A, %d %B %Y") %></td>
+		<td><%= @project.description %></td>
+		<td><%= @project.end_date.strftime("%A, %d %B %Y") %></td>
+		<td><%= @project.budget %></td>
+		<td><%= link_to "Show", project_path(@project.id) %>
+		</tr>
+		
+		
+
+		<tbody>
+		<% @project.tasks.each do |task| %>
+		<tr>
+		<td><%= task.title %></td>
+		<td><%= task.due_date %></td>
+		<td><%= task.is_completed ? "Yes" : "No" %></td>
+		</tr>
+		<% end %>
+		</tbody>
+		

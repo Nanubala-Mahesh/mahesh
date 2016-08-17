@@ -1,0 +1,74 @@
+<h3>completed tasks </h3>
+<ul>
+<% @completed_task.each do |task| %>
+<li><%= task.title %></li>
+<% end %>
+</ul>
+
+<h3>incompleted task</h3>
+<ul>
+<% @incompleted_task.each do |task| %>
+<li><%= task.title %></li>
+<% end %>
+</ul>
+
+<h3>Over_Due_tasks </h3>
+<ul>
+<% @over_due_task.each do |task| %>
+<li><%= task.title %></li>
+<% end %>
+</ul> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>Listing Projects</h3>
+<table border="1">
+<thread>
+<tr>
+<th> id </th>
+<th> Title </th>
+<th> Project_id </th>
+<th> due_date </th>
+<th> Status </th>
+</tr>
+</thread>
+<tbody>
+<% Task.all.each do |task| %>
+	<tr>
+	<td><%= task.id %></td>
+	<td><%= task.title %></td>
+	<td><%= task.project_id %></td>
+	<td><%= task.due_date %></td>
+	<td><%= task.is_completed %></td>
+	</tr>
+	<% end %>
+	</tbody>
+	</table>

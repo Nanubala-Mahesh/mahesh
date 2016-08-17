@@ -1,0 +1,81 @@
+<div class="row">
+	<div class="col=md-7">
+		<div class="page-header">
+		<h2><%= @client.name %><br/>
+		<small>
+			<span class="glyphicon glyphicon-briefcase"></span><%= @client.copany %>
+			<span class="glyphicon glyphicon-earphone"></span><%= @client.mobile %>
+			<span class="glyphicon glyphicon-envelop"></span><%= mail_to @client.email %>
+			<%= @client.code %>
+			</small></h2>
+		</div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Projects</div>
+			<div class="panel-body">
+				<ul class="list-group">
+					<% for project in@client.projects %>
+						<li class="list-group-item"><%= project.name %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class="col-md-5">
+				
+	</div>
+</div>
+
+
+<%= link_to "edit" , edit_client_path(@client.id) %> | 
+			<%= link_to "destroy", client_path(@client.id), data: {method: :delete, confirm: "Are you sure?"} %>
+
+			<% if @client.projects.empty? %>
+			No Project Found
+			<% else %>
+			<h3> Total Projects: <%= @client.projects.size %></h3>
+			<ul>
+			<% @client.projects.each do |project| %>
+			<li><%= link_to project.name, project_path(project.id) %></li>
+			<% end %>
+			</ul>
+			<% end %>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header" >
+			<h2>Time line</h2>
+							<% data = []
+				@client.projects.each do |project|
+					data.push([project.name, project.start_date,project.end_date])
+				end
+				%>
+				<%= timeline(data) %>
+
+
+				<h4> Total Tasks for this client is :
+				<p> Inner Join </p>
+					<%= Task.joins(:project).where('projects.client_id = ?', @client.id).size %>
+					</h4>
+
+
+				<h4><p> Select in </p></h4>
+				<%= Task.where(project_id: @client.project_ids).size %>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+

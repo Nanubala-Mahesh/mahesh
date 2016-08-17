@@ -1,0 +1,50 @@
+
+
+<h1>Say Hello</h1>
+
+<a href = "/say/goodbye"> Say Goodbye</a>
+<%= link_to "Say Goodbye(ruby)",say_goodbye_path %> <br>
+<%= link_to "say products", say_products_path %>
+
+
+<!--
+<%= 2 + 2 %>
+
+<%= movies = ["U Turn", "Kabali", "Indenpance Day", "Sultan", "Thithi"] %>
+
+<ol>
+<li>Apple</li>
+<li>Mango</li>
+<li>Water Melon</li>
+</ol>
+
+<h3>Now showing</h3>
+<ol>
+<% movies.each do |movie| %>
+<li><%= movie %></li>
+<% end %>
+</ol>
+
+<% signed_in = [true,false].sample %>
+<% if signed_in %>
+<p>Welcome User</p>
+<% else %>
+<p>Login to continue</p>
+<% end %>
+-->
+<%# this is a comment %>
+<br>
+<%= movies = {"Uturn" => ["veeresh,pur", 120, 8.4], "Kabali" => ["inox,lido",144,9.2], "Sultan" => ["inox,pur",132,9.8]} %>
+<h1>Now Showing</h1>
+
+<ol>
+<% movies.each do |key,val| %>
+<li><h4><%= key %> : </h4></li>
+<ul>
+<li>Theatre-<%= val[0] %></li>
+<li>duration-<%= val[1] %> mins</li>
+<li>rating-<%= val[2] %></li>
+</ul>
+
+<% end %>
+</ol>

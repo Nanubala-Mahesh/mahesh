@@ -1,0 +1,75 @@
+<%= form_for @project do |f| %>
+
+
+<% if @project.errors.any? %>
+		<h4>These errors prohibited the form from being saved: </h4>
+			<ul style="color:red;">
+				<% @project.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+	<% end %>
+	</ul>
+<% end %>
+	
+
+	<div class="form-group">
+	<label>Client</label><br/>
+	<%= f.collection_select :client_id, current_user.clients, :id, :name, {prompt: "Select Client"}, {class: "form-control"} %><br/>
+	</div>
+
+	<div class="form-group">
+	<label>Name</label><br/>
+	<%= f.text_field :name, class: "form-control", required: true %><br/>
+	</div>
+
+
+	<div class="form-group">
+	<label>Description</label><br/>
+	<%= f.text_area :description, class: "form-control" %><br/>
+	</div>
+
+
+
+	<div class="form-group">
+	<label>Start Date</label><br/>
+	<%= f.date_field :start_date, order:[:day,:month,:year] %><br/>
+	</div>
+
+	<div class="form-group">
+	<label>End Date</label><br/>
+	<%= f.date_select :end_date, order:[:day,:month,:year] %><br/>
+	</div>
+
+
+	<div class="form-group">
+	<label>Status</label><br/>
+	
+	<%# f.select :status, ["Name", "On-Going", "Completed"] %>
+	<%= f.radio_button :status, "New" %> New
+	<%= f.radio_button :status, "On-Going" %> On-Going
+	<%= f.radio_button :status, "Completed" %> Completed
+	<br/>
+	</div>
+
+	
+
+	<div class="form-group">
+	<label>Estimated Budget</label><br/>
+	<%= f.number_field :budget, class: "form-control" %><br/>
+	</div>
+
+
+	<div class="form-group">
+	<label>Select Categories </label><br/>
+	<%= f.collection_check_boxes :category_ids, current_user.categories, :id, :name do |b| %>
+	<%= b.check_box %>
+	<%= b.label %>
+	<br/>
+	<% end %>
+	</div>
+
+
+	<%= f.submit "Submit", class: "btn btn-primary" %>
+
+	<% end %>
+
+

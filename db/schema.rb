@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20160816055734) do
     t.string   "copany"
     t.string   "mobile"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "code"
   end
